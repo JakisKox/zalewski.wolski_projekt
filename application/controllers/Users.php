@@ -13,6 +13,7 @@ class Users extends CI_Controller
     {
         $this->load->model('user_model');
         $dane["aukcje"] = $this->user_model->aukcje();
+        $dane['photos'] = $this->user_model->photos2();
 
 
         // Zwracamy widoki, przypisując do jednego z nich tablicę $data
@@ -21,16 +22,7 @@ class Users extends CI_Controller
         $this->load->view('partials/footer');
     }
 
-
-    public function produkt($produkt)
-    {
-        $this->session->set_userdata('produkt', $produkt);
-        $this->load->model('user_model');
-        $dane["produkt"] = $this->user_model->produkt($produkt);
-        $this->load->view('partials/header');
-        $this->load->view('produkt', $dane);
-        $this->load->view('partials/footer');
-    }
+    
 
 
     public function login()
@@ -315,6 +307,8 @@ class Users extends CI_Controller
     {
         $this->load->model('user_model');
         $dane["aukcje"] = $this->user_model->your();
+        $dane['photos'] = $this->user_model->photos2();
+
 
 
         // Zwracamy widoki, przypisując do jednego z nich tablicę $data
@@ -323,10 +317,13 @@ class Users extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+
+
     public function participate()
     {
         $this->load->model('user_model');
         $dane["aukcje"] = $this->user_model->participate();
+        $dane['photos'] = $this->user_model->photos2();
 
 
         // Zwracamy widoki, przypisując do jednego z nich tablicę $data

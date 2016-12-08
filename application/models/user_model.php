@@ -68,6 +68,11 @@ class User_model extends CI_Model
         return $this->db->where(array('id_aukcji' => $id))->get('photos')->result_array();
     }
 
+    public function photos2()
+    {
+        return $this->db->get('photos')->result_array();
+    }
+
     public function licytuj($id, $cena, $koniec)
     {
         $array = array(
@@ -112,6 +117,7 @@ class User_model extends CI_Model
         $this->db->select('auctions.*, stories.id_użytkownika');
         $this->db->from('auctions');
         $this->db->join('stories', 'auctions.id = stories.id_aukcji');
+        $this->db->where('stories.id_użytkownika', $this->session->userdata('user_id'));
         $this->db->group_by('stories.id_użytkownika');
         return $this->db->get()->result_array();
 
